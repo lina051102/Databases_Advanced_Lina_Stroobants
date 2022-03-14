@@ -3,6 +3,7 @@ from time import sleep
 from bs4 import BeautifulSoup
 from os.path import exists
 import pymongo as mongo
+import pandas
 import json
 
 while True:
@@ -42,9 +43,7 @@ while True:
     file.write(writeText)
     file.close()
 
-    file = open("BitcoinScraping.json",'r')
-    reader = file.read()
-    # connecting to databese
+    # connecting to database
     client = mongo.MongoClient("mongodb://127.0.0.1:27017")
 
     # Make new database
@@ -53,17 +52,36 @@ while True:
     # setting the collumn
     col_bitcoin = my_bit_database["BitcoinData"]
 
-    r = json.load(BitcoinScraping.json)
-    BitcoinScraping_json_data = reader
-    
-    print(BitcoinScraping_json_data)
-    
-         
-    result_data = BitcoinScraping_json_data.to_dict("lines")
 
-    # inserting the data
-    insert_data = col_bitcoin.insert_one(r)
-    file.close()
+    file = open("BitcoinScraping.json")
+    r = json.load(file)
+    col_bitcoin.insert_one(file)
+
+
+    # with open("BitcoinScraping.json") as file:
+    #     file_data = json.load(file)
+
+    # if isinstance(file_data, type(list)):
+    #     col_bitcoin.insert_many(file_data)
+    
+    # else:
+    #     col_bitcoin.insert_one(file_data)
+
+
+    # # inserting the data
+    # insert_data = col_bitcoin.insert_one(r)
+    # file.close()
+
+    # werkt half 
+    # json1_file = open("BitcoinScraping.json")
+    # json1_str = json1_file.read()
+    # json1_data = json.loads(json1_str)[0]
+    # insert_data = col_bitcoin.insert_one(json1_data)
+    # file.close()
+
+    # datapoint = json1_data['Hash']
+    # print(datapoint)
+
     print("Scraper uitgevoerd!")
     sleep(60)
 
