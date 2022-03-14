@@ -46,7 +46,6 @@ while True:
     #Stap 1 --> werkt
     json_file = "BitcoinScraping.json"
     json_file2 = pd.read_json(json_file, convert_dates=True)
-    print(json_file2.head())
 
     #Stap 2
     # connecting to database
@@ -55,7 +54,7 @@ while True:
     # Make new database
     my_bit_database = client["Scraper"]
 
-    json_data = json_file2.to_dict("lines")
+    json_data = json_file2[0:5].to_dict("lines")
 
     # setting the collumn
     col_bitcoin = my_bit_database["BitcoinData"]
@@ -63,22 +62,5 @@ while True:
     # inserting the data
     insert_data = col_bitcoin.insert_one(json_data)
 
-    # # werkt half 
-    # # json1_file = open("BitcoinScraping.json")
-    # # json1_str = json1_file.read()
-    # # json1_data = json.loads(json1_str)[0]
-    # # insert_data = col_bitcoin.insert_one(json1_data)
-    # # file.close()
-
-    # # datapoint = json1_data['Hash']
-    # # print(datapoint)
-
     print("Scraper uitgevoerd!")
     sleep(60)
-
-
-
-
-
-
-    
