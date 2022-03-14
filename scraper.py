@@ -3,7 +3,7 @@ from time import sleep
 from bs4 import BeautifulSoup
 from os.path import exists
 import pymongo as mongo
-import pandas
+import pandas as pd
 import json
 
 while True:
