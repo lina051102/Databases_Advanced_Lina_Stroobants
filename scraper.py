@@ -43,44 +43,35 @@ while True:
     file.write(writeText)
     file.close()
 
+    #Stap 1 --> werkt
+    json_file = "BitcoinScraping.json"
+    json_file2 = pd.read_json(json_file, convert_dates=True)
+    print(json_file2.head())
+
+    #Stap 2
     # connecting to database
     client = mongo.MongoClient("mongodb://127.0.0.1:27017")
 
     # Make new database
     my_bit_database = client["Scraper"]
 
+    json_data = json_file2.to_dict("lines")
+
     # setting the collumn
     col_bitcoin = my_bit_database["BitcoinData"]
 
+    # inserting the data
+    insert_data = col_bitcoin.insert_one(json_data)
 
-    file = open("BitcoinScraping.json")
-    r = json.load(file)
-    col_bitcoin.insert_one(file)
+    # # werkt half 
+    # # json1_file = open("BitcoinScraping.json")
+    # # json1_str = json1_file.read()
+    # # json1_data = json.loads(json1_str)[0]
+    # # insert_data = col_bitcoin.insert_one(json1_data)
+    # # file.close()
 
-
-    # with open("BitcoinScraping.json") as file:
-    #     file_data = json.load(file)
-
-    # if isinstance(file_data, type(list)):
-    #     col_bitcoin.insert_many(file_data)
-    
-    # else:
-    #     col_bitcoin.insert_one(file_data)
-
-
-    # # inserting the data
-    # insert_data = col_bitcoin.insert_one(r)
-    # file.close()
-
-    # werkt half 
-    # json1_file = open("BitcoinScraping.json")
-    # json1_str = json1_file.read()
-    # json1_data = json.loads(json1_str)[0]
-    # insert_data = col_bitcoin.insert_one(json1_data)
-    # file.close()
-
-    # datapoint = json1_data['Hash']
-    # print(datapoint)
+    # # datapoint = json1_data['Hash']
+    # # print(datapoint)
 
     print("Scraper uitgevoerd!")
     sleep(60)
