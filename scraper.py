@@ -58,8 +58,7 @@ while True:
     
     print(BitcoinScraping_json_data)
     
-    
-    
+         
     result_data = BitcoinScraping_json_data.to_dict("lines")
 
     # inserting the data
