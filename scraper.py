@@ -44,12 +44,12 @@ while True:
     file.write(writeText)
     file.close()
 
-    #Stap 1 --> werkt
+    #Stap 1
     json_file = "BitcoinScraping.json"
     json_file2 = pd.read_json(json_file, convert_dates=True)
 
     #Stap 2
-    # connecting to database
+    # Connecting to database
     client = mongo.MongoClient("mongodb://127.0.0.1:27017")
 
     # Make new database
@@ -57,10 +57,10 @@ while True:
 
     json_data = json_file2[0:5].to_dict("lines")
 
-    # setting the collumn
+    # Setting collumn
     col_bitcoin = my_bit_database["BitcoinData"]
 
-    # inserting the data
+    # Inserting data
     insert_data = col_bitcoin.insert_one(json_data)
 
     print("Scraper uitgevoerd!")
