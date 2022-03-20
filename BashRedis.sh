@@ -10,8 +10,11 @@ wslconfig /setdefault Ubuntu
 ## Open WSL terminal
 sudo apt-get install redis
 
+# Starting server
 redis-server
 
-redis-server --port 6380
-
+# Testing server
 redis-cli ping
+
+# Printing bash file
+cat BashRedis.sh
