@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 from os.path import exists
 import pymongo as mongo
 import pandas as pd
-import json
+import redis
+
 
 while True:
 
