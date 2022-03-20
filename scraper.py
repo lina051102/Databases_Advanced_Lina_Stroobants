@@ -7,6 +7,9 @@ import pandas as pd
 import redis
 
 
+r = redis.StrictRedis(host='localhost', port=6380, db=0)
+
+
 while True:
 
     url = "https://www.blockchain.com/btc/unconfirmed-transactions"

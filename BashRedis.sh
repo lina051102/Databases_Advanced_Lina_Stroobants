@@ -11,7 +11,7 @@ wslconfig /setdefault Ubuntu
 sudo apt-get install redis
 
 # Starting server
-redis-server
+redis-server --port 6380
 
 # Testing server
 redis-cli ping
