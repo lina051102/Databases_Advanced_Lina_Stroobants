@@ -9,11 +9,12 @@ Dit maakte het moeilijk om hiermee te werken. Hierdoor heb ik deze scraper in Wi
 <br> 
 
 ### Werking Crpytoscraper
-Eens de python-file loopt, scrapet deze automatisch elke minuut de data en bewaart deze in een json-file "BitcoinScraping.json". Om de data dan uiteindelijk door te sturen naar de database in MongoDB, zet ik de json-file om naar een dataframe.
-MongoDB verwacht een dictionary, een json-file werkt dus niet. Ik stuur niet alle hashes van elke minuut door. Ik geef enkel de eerste 5 per minuut door. Anders gaat er te veel data opgeslagen worden.
+Wanneer de python file loopt, scrapet ze automatisch elke minuut de data. In Redis wordt de hash vergeleken met diegene die al in de database op MongoDB staan. Als hij er nog niet bestaat, zet hij ze erbij. Voor 70 seconden blijft de hash in de cache opgeslagen. Na 60 seconden wordt die toegevoegd, maar ik heb een marge van 10 seconden genomen in het geval de scraper vertraagd is.
 
-1. Scraper haalt via een request op de site "https://www.blockchain.com/btc/unconfirmed-transactions" de data op.
-2. Voor ik data in een file zet, kijk ik eerst na of er al een json-file bestaat. Zo niet, dan maak ik deze aan.
-3. Ik filter de gescrapte data. Ik heb niet alle data nodig, enkel Hash, Time, Amount (BTC) en Amount (USD).
-4. De nieuwe data wordt toegevoegd met de reeds gescrapte data in de json-file
-5. Elke minuut runt het programma opnieuw en wordt de nieuwe data gescraped
+1. Via een request op de site "https://www.blockchain.com/btc/unconfirmed-transactions" haalt de scraper de nodige data (Hash, Time, Amount(BTC) en Amount(USD)) op.
+
+2. In Redis wordt de hash vergeleken met diegene die al in de database op MongoDB staan. Als hij er nog niet bestaat, zet hij ze erbij.
+
+3. Voor 70 seconden blijft de hash in de cache opgeslagen. Na 60 seconden wordt die toegevoegd, maar ik heb een marge van 10 seconden genomen in het geval de scraper vertraagd is.
+
+4. Na 1 minuut loopt de scraper opnieuw en wordt nieuwe data toegevoegd.
