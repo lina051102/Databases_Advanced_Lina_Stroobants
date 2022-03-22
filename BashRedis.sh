@@ -18,3 +18,6 @@ redis-cli ping
 
 # Printing bash file
 cat BashRedis.sh
+
+# Redis installeren voor Python
+pip install redis
