@@ -9,10 +9,10 @@ import redis
 client = mongo.MongoClient("mongodb://127.0.0.1:27017")
 
 ## Make new database
-my_bit_database = client["Scraper"]
+my_bitcoin_database = client["Scraper"]
 
 ## Setting column
-col_bitcoin = my_bit_database["BitcoinData"]
+col_bitcoin = my_bitcoin_database["BitcoinData"]
 
 # Redis
 red = redis.StrictRedis(host='localhost', port=6380, db=0)
@@ -25,9 +25,8 @@ while True:
     if soup.find("div", class_="sc-1g6z4xm-0 hXyplo") != None:
         list = soup.findAll("div", class_="sc-1g6z4xm-0 hXyplo")
 
-        EersteVijf = list[0:5]
-
-        for item in EersteVijf:
+        EersteTien = list[0:10]
+        for item in EersteTien:
             item = str(item.get_text())
             hash = item.replace("Hash","").split("Time")[0]
             time = item.split("Time")[1].split("Amount (BTC)")[0]
@@ -39,6 +38,7 @@ while True:
                 col_bitcoin.insert_one(data)
 
             red.set(hash, time, ex=70)
-
+            
     print("Scraper uitgevoerd!")
     sleep(60)
+    col_bitcoin.delete_many({})
