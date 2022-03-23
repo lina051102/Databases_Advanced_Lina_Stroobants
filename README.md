@@ -1,8 +1,6 @@
 # Bitcoinscraper
 ## Lina Stroobants
 
-<br>
-
 ### VM - Ubuntu
 Werkte niet naar behoren. Kreeg ofwel veel errors ofwel geen en VM crashte... 7 op de 10 keer werkte het niet.
 Dit maakte het moeilijk om hiermee te werken. Hierdoor heb ik deze scraper in Windows gemaakt.
