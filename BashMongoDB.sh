@@ -1,3 +1,4 @@
+#!/bin/bash
 # ------------------ Bash file for scraper ------------------
 
 # Clearing window

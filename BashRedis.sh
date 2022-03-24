@@ -1,3 +1,4 @@
+#!/bin/bash
 # ------------------ Bash file for Redis ------------------
 # Install Ubuntu in Microsoft Store
 
