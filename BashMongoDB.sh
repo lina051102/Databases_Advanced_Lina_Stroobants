@@ -18,6 +18,3 @@ echo "Ending script"
 
 # Printing bash file
 cat BashScraper.sh
-
-# MongoDB installeren voor Python
-pip install pymongo
