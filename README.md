@@ -16,3 +16,7 @@ Wanneer de python file loopt, scrapet ze automatisch elke minuut de data. In Red
 3. Voor 70 seconden blijft de hash in de cache opgeslagen. Na 60 seconden wordt die toegevoegd, maar ik heb een marge van 10 seconden genomen in het geval de scraper vertraagd is.
 
 4. Na 1 minuut loopt de scraper opnieuw en wordt nieuwe data toegevoegd (de oude wordt dan verwijderd uit de database).
+
+### Werking docker-compose
+Om Docker omgeving aan te zetten: docker-compose up -d (bij eerste keer maakt hij nieuwe containers aan, volgende keren start hij gemaakte containers op)
+Om Docker omgeving af te zetten: docker-compose stop

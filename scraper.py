@@ -6,7 +6,7 @@ import redis
 
 # MongoDB
 ## Connecting to database
-client = mongo.MongoClient("mongodb://127.0.0.1:27017")
+client = mongo.MongoClient("mongodb://127.0.0.1:27016")
 
 ## Make new database
 my_bitcoin_database = client["Scraper"]
@@ -15,7 +15,7 @@ my_bitcoin_database = client["Scraper"]
 col_bitcoin = my_bitcoin_database["BitcoinData"]
 
 # Redis
-red = redis.StrictRedis(host='localhost', port=6380, db=0)
+red = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 while True:
     url = "https://www.blockchain.com/btc/unconfirmed-transactions"
